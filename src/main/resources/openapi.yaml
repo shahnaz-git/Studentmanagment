@@ -1,0 +1,182 @@
+openapi: 3.0.1
+info:
+  title: Student Management API
+  description: 'This is a Student Management module. You can find out more about Student Management at [http://student.in](http://student.io) or on [www.student.in, #student].'
+  termsOfService: http://student/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Student Management
+  url: http://swagger.io
+servers:
+  - url: https://localhost:8080/studentdetails/api/v1
+  - url: http://localhost:8080/studentdetails/api/v1
+tags:
+  - name: Student Management API
+    description: Everything Student Management
+    externalDocs:
+      description: Find out more 
+      url: http://swagger.io
+paths:
+  /studentdetails:
+    post:
+      tags:
+        - Student Information
+      summary: Adding a new student
+      requestBody:
+        description: student details that needs to be added
+        content:
+          application/json:
+            schema:
+             $ref: '#/components/schemas/StudentDetails'
+        required: true
+      responses:
+        '201':
+          description: Successful
+          content: {}      
+        '400':
+          description: Bad request input
+          content: {}
+        '404':
+          description: Data not found
+          content: {}
+        '500':
+          description: Invalid input
+          content: {}          
+        '502':
+          description: Bad Gatway
+          content: {}               
+      x-codegen-request-body-name: body
+    get:
+      tags:
+        - Student Information
+      summary:  Getting all student details
+      responses:
+        '200':
+          description:  A list of all student details
+          content:
+            applicantion/json:
+              schema:
+                $ref: '#/components/schemas/StudentDetails'
+        '201':
+          description: Successful
+          content: {}
+        '400':
+          description: Bad request input
+          content: {}
+        '404':
+          description: Data not found
+          content: {}
+        '500':
+          description: Invalid input
+          content: {}
+        '502':
+          description: Bad Gatway
+      x-codegen-request-body-name: body
+  /studentdetails/{id}:
+    get:
+      tags:
+        - Student Information
+      summary: Getting student details by id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A list of a student details
+          content:
+            applicantion/json:
+              schema:
+                $ref: '#/components/schemas/StudentDetails'
+        '201':
+          description: Successful
+          content: {}
+        '400':
+          description: Bad request input
+          content: {}
+        '404':
+          description: Data not found
+          content: {}
+        '500':
+          description: Invalid input
+          content: {}
+        '502':
+          description: Bad Gatway
+      x-codegen-request-body-name: body   
+    put:
+        tags:
+          - Student Information
+        summary: Editing student details
+        parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        requestBody:
+          description: student details that need to be added
+          content:
+            applicantion/json:
+              schema:
+                $ref: '#/components/schemas/StudentDetails'
+          required: true      
+        responses:
+          '200':
+            description: A list of a student details
+            content:
+              applicantion/json:
+                schema:
+                  $ref: '#/components/schemas/StudentDetails'
+          '201':
+            description: Successful
+            content: {}
+          '400':
+            description: Bad request input
+            content: {}
+          '404':
+            description: Data not found
+            content: {}
+          '500':
+            description: Invalid input
+            content: {}
+          '502':
+            description: Bad Gatway
+        x-codegen-request-body-name: body
+        
+components:
+  schemas:
+    StudentDetails:
+      type: object
+      required:
+        - student_id
+        - student_name
+        - student_email
+        - student_phone
+        - student_add
+        - status
+      properties:
+        student_id:
+          type: integer
+          maxLength: 10
+        student_name:
+          type: string
+          maxLength: 200
+        student_email:
+          type: string
+          maxLength: 200
+        student_phone:
+          type: integer
+          maxLength: 10
+        student_add:
+          type: string
+          maxLength: 200
+        status:
+          type: integer
+          maxLength: 10  
