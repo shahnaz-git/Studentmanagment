@@ -20,6 +20,11 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef :
+                  name : mysql-config
+                  key: mysql-host
             - name: USER_NAME
               valueFrom:
                 secretKeyRef:
@@ -30,8 +35,14 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: mysql-password
-            - name: DB_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config
-                  key: mysql-url
+
+                  # - name: DB_URL
+              #    valueFrom:
+                      # configMapKeyRef:
+                        # name: mysql-config
+                  # key: mysql-url
+            - name: DB_NAME 
+              valueFrom :
+                configMapKeyRef :
+                  name : mysql-config
+                  key :  dbName
