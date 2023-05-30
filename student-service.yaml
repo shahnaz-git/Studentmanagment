@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: student-manage-service
+  name: student-management-service
 spec:
   type: NodePort
   selector:

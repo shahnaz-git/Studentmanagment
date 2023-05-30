@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: student-manage-deployment
+  name: student-management-deployment
   labels:
     app: student-manage
 spec:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: student-manage
-          image: gcr.io/my-sample-project-382609/student-management
+          image: gcr.io/my-sample-project-382609/student-management-new
           ports:
             - containerPort: 8080
           env:
