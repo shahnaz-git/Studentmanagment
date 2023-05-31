@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: student-management-ingress
+spec:
+  rules:
+  - host: student.linkcc.in
+    http:
+      paths:
+        - path: /studentdetails/api/v1
+          pathType: Prefix
+          backend:
+            service:
+              name: student-management-service
+              port:
+                number: 4200

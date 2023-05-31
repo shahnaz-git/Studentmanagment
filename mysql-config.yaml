@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: mysql-config
 data:
-  mysql-host: mysql-student-deployment-654c9546d4-5jzb4
+              #mysql-host: mysql-student-deployment-6db48bfc94-9p6pj
+  mysql-host: 35.200.242.92
   dbName: student
   mysql-url: mysql-service

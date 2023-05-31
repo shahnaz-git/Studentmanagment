@@ -8,6 +8,6 @@ spec:
     app: student-manage
   ports:
     - protocol: TCP
-      port: 8080
+      port: 4200
       targetPort: 8080
       nodePort: 30100
