@@ -15,7 +15,7 @@ pipeline{
             steps{
                  sh 'which git'
                  echo 'pulling branch '+ ${env.BRANCH_NAME}
-                 git branch: "${env.BRANCH_NAME}" , credentialsId: 'github-id', url: 'https://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@github.com/shahnaz-git/Studentmanagment.git'
+                 git branch: "${env.BRANCH_NAME}" , credentialsId: 'github', url: 'https://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@github.com/shahnaz-git/Studentmanagment.git'
                 
                 // git 'https://github.com/shahnaz-git/Studentmanagment.git'
 
