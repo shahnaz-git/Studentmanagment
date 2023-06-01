@@ -3,11 +3,20 @@ pipeline{
     tools{
         maven 'Maven'
     }
-     
+    parameters{
+        string(name: 'DOCKER_REPO', defaultValue: 'nxg-digital')
+        string(name: 'DOCKER_IMAGE', defaultValue: 'studentmanagement')
+        string(name: 'DOCKER_TAG', defaultValue: 'v1')
+        // string(name: '', defaultValue: 'nxg-digital')
+    }
+    environment{
+        BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+    }
     stages{
-        stage('Git Checkout'){
+        stage('SCM Checkout'){
             steps{
-                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shahnaz-git/Studentmanagment.git']])
+                 echo 'pulling branch '+ ${env.BRANCH_NAME}
+                 checkout scmGit(branches: [[name: '*/test']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shahnaz-git/Studentmanagment.git']])
                  }
             }
         stage('Build Maven'){
@@ -18,15 +27,42 @@ pipeline{
             }
         }
          
-        stage('Build Docker Image'){
+        stage('Build Image'){
             steps{
                 script{
-                    sh "pwd"
-                    sh "ls -ltr"
-                    sh 'docker build -t gcr.io/nxg-digital/studentManagement -f Dockerfile .'
+                     
+                    sh 'docker build -t gcr.io/${params.DOCKER_REPO}/${params.DOCKER_IMAGE}:${params.DOCKER_TAG}  .'
                     
                 }
             }
         }
+        stage('Push Image'){
+            steps{
+                script{
+                     
+                    sh 'gcloud auth configure-docker'
+                    sh 'sudo docker push gcr.io/${params.DOCKER_REPO}/${params.DOCKER_IMAGE}:${params.DOCKER_TAG} '
+                    
+                }
+            }
+        }
+        stage('Remove Image'){
+            steps{
+                script{
+                    echo "Remove docker image"
+                    sh 'sudo docker rmi gcr.io/${params.DOCKER_REPO}/${params.DOCKER_IMAGE}:${params.DOCKER_TAG} '
+                    
+                }
+            }
+        }
+        post{
+            always{
+              emailext to: "sowjanya@nxgsolutions.in",
+              subject: "Test Email",
+              body: "Test",
+              attachLog: true
+        }
+    }
+        
     }
 }
