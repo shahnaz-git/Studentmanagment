@@ -1,8 +1,6 @@
 pipeline{
     agent any
-    tools{
-        maven 'Maven'
-    }
+     
     parameters{
         string(name: 'DOCKER_REPO', defaultValue: 'nxg-digital')
         string(name: 'DOCKER_IMAGE', defaultValue: 'studentmanagement')
