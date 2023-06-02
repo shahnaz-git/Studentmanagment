@@ -1,5 +1,9 @@
 pipeline{
     agent any
+    tools{
+        maven 'Maven3'
+        git 'Default'
+    }
      
     parameters{
         string(name: 'DOCKER_REPO', defaultValue: 'nxg-digital')
