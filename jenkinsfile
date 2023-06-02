@@ -17,6 +17,7 @@ pipeline{
         stage('SCM Checkout'){
             steps{
                  sh 'which git'
+                 sh 'pwd'
                  // git 'https://github.com/shahnaz-git/Studentmanagment.git'
 
                  // echo 'pulling branch '+ ${env.BRANCH_NAME}
