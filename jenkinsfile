@@ -19,7 +19,7 @@ pipeline{
                  sh 'which git'
                  sh 'pwd'
                  sh 'ls '
-                 sh 'rm -r target'
+                 sh 'cd target'
                  sh 'ls'
                  // git 'https://github.com/shahnaz-git/Studentmanagment.git'
 
