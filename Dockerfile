@@ -6,7 +6,7 @@ FROM openjdk:17-oracle
 WORKDIR /app
 
 # Copy the jar file into our app
-COPY ./target/*.jar /app/app.jar
+COPY target/*.jar /app/app.jar
 
 #copy gcp key
 #COPY ./GcsKey/achievers-one-1fdb21f92e43.json /app/gcp_credentials.json
