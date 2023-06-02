@@ -18,6 +18,7 @@ pipeline{
             steps{
                  sh 'which git'
                  sh 'pwd'
+                 sh 'ls '
                  // git 'https://github.com/shahnaz-git/Studentmanagment.git'
 
                  // echo 'pulling branch '+ ${env.BRANCH_NAME}
