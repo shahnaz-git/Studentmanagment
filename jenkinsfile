@@ -64,7 +64,7 @@ pipeline{
             steps{
                 script{
                      
-                    sh 'gcloud auth configure-docker'
+                    sh 'gcloud auth configure-docker -q '
                     sh 'sudo docker push gcr.io/${params.DOCKER_REPO}/${params.DOCKER_IMAGE}:${params.DOCKER_TAG} '
                     
                 }
