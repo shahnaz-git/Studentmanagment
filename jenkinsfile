@@ -65,8 +65,8 @@ pipeline{
                 script{
                      
                     sh 'gcloud auth configure-docker -q '
-                    // sh 'sudo docker push gcr.io/${params.DOCKER_REPO}/${params.DOCKER_IMAGE}:${params.DOCKER_TAG} '
-                    sh 'sudo docker push gcr.io/nxg-digital/studentmanagement:v1'
+                    // sh 'docker push gcr.io/${params.DOCKER_REPO}/${params.DOCKER_IMAGE}:${params.DOCKER_TAG} '
+                    sh 'docker push gcr.io/nxg-digital/studentmanagement:v1'
                     
                 }
             }
@@ -75,7 +75,7 @@ pipeline{
             steps{
                 script{
                     echo "Remove docker image"
-                    sh 'sudo docker rmi gcr.io/nxg-digital/studentmanagement:v1 '
+                    sh 'docker rmi gcr.io/nxg-digital/studentmanagement:v1 '
                     echo "Docker image removed"
                     
                 }
