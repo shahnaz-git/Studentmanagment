@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: student-manage
-          image: gcr.io/my-sample-project-382609/student-management-new
+          image: gcr.io/nxg-digital/studentmanagement:v1
           ports:
             - containerPort: 8080
           env:
