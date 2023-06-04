@@ -13,7 +13,7 @@ pipeline{
         string(name: 'DOCKER_TAG', defaultValue: 'v1')
         // string(name: '', defaultValue: 'nxg-digital')
     }
-    environment{
+    environment {
         BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
         JAVA_HOME = "/opt/java/openjdk"
     }
@@ -23,13 +23,9 @@ pipeline{
                  sh 'which git'
                  sh 'pwd'
                  sh 'ls '
-                 sh 'cd target \
-                       ls \
-                       pwd'
-                  
                  // git 'https://github.com/shahnaz-git/Studentmanagment.git'
 
-                 echo 'pulling branch '+ ${env.BRANCH_NAME}
+                 echo "pulling branch ${env.BRANCH_NAME}"
                   
                  git branch: "${env.BRANCH_NAME}" , credentialsId: 'github-id', url: 'https://github.com/shahnaz-git/Studentmanagment.git'
                 
