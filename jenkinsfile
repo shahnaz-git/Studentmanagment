@@ -36,7 +36,7 @@ pipeline{
                             sh "kubectl apply -f mysql-secret.yaml"
                             sh "kubectl apply -f student-deploy.yaml"
                             sh "kubectl apply -f student-service.yaml"
-                            sh "kubectl apply -f student-service.yaml"
+                            sh "kubectl apply -f student-ingress.yaml"
                             
                             sh "kubectl get pods"
                         } catch(error){
@@ -44,7 +44,7 @@ pipeline{
                             sh "kubectl create -f mysql-secret.yaml"
                             sh "kubectl create -f student-deploy.yaml"
                             sh "kubectl create -f student-service.yaml"
-                            sh "kubectl create -f student-service.yaml"
+                            sh "kubectl create -f student-ingress.yaml"
                             sh "kubectl get pods"
                         }
                 }
