@@ -1,0 +1,94 @@
+pipeline{
+    agent any
+    tools{
+        maven 'Maven'
+         jdk 'Java17'
+        
+     
+    }
+     
+    parameters{
+        string(name: 'DOCKER_REPO', defaultValue: 'nxg-digital')
+        string(name: 'DOCKER_IMAGE', defaultValue: 'studentmanagement')
+        string(name: 'DOCKER_TAG', defaultValue: 'v1')
+        // string(name: '', defaultValue: 'nxg-digital')
+    }
+    environment{
+        BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+        JAVA_HOME = "/opt/java/openjdk"
+    }
+    stages{
+        stage('SCM Checkout'){
+            steps{
+                 sh 'which git'
+                 sh 'pwd'
+                 sh 'ls '
+                 sh 'cd target \
+                       ls \
+                       pwd'
+                  
+                 // git 'https://github.com/shahnaz-git/Studentmanagment.git'
+
+                 // echo 'pulling branch '+ ${env.BRANCH_NAME}
+                 // git branch: "${env.BRANCH_NAME}" , credentialsId: 'github', url: 'https://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@github.com/shahnaz-git/Studentmanagment.git'
+                 
+                
+           
+                  
+                 }
+            }
+        stage('Build Maven'){
+            steps{
+                
+                
+                // sh "mvn -Dmaven.test.failure.ignore=true clean package"
+               //  sh 'mvn package'
+                 sh 'java --version'
+                 sh 'mvn clean install'
+                 sh 'mvn --version'
+            }
+        }
+         
+        stage('Build Image'){
+            steps{
+                script{
+                     
+                    // sh 'docker build -t gcr.io/"${params.DOCKER_REPO}"/"${params.DOCKER_IMAGE}":"${params.DOCKER_TAG}"  .'
+                    sh 'docker build -t gcr.io/nxg-digital/studentmanagement:v1 .'
+                    echo "Image build"
+                    
+                }
+            }
+        }
+        stage('Push Image'){
+            steps{
+                script{
+                     
+                    sh 'gcloud auth configure-docker -q '
+                    // sh 'docker push gcr.io/${params.DOCKER_REPO}/${params.DOCKER_IMAGE}:${params.DOCKER_TAG} '
+                    sh 'docker push gcr.io/nxg-digital/studentmanagement:v1'
+                    
+                }
+            }
+        }
+        stage('Remove Image'){
+            steps{
+                script{
+                    echo "Remove docker image"
+                    sh 'docker rmi gcr.io/nxg-digital/studentmanagement:v1 '
+                    echo "Docker image removed"
+                    
+                }
+            }
+        }
+    //     post{
+    //         always{
+    //           emailext to: "sowjanya@nxgsolutions.in",
+    //           subject: "Test Email",
+    //           body: "Test",
+    //           attachLog: true
+    //     }
+    // }
+        
+    }
+}
