@@ -50,7 +50,7 @@ pipeline{
                 script{
                      
                      echo "Project name ${params.DOCKER_REPO}"
-                     sh 'docker build -t gcr.io/${params.DOCKER_REPO}/${params.DOCKER_IMAGE}:${params.DOCKER_TAG}  .'
+                     sh "docker build -t gcr.io/${params.DOCKER_REPO}/${params.DOCKER_IMAGE}:${params.DOCKER_TAG}  ."
                    // sh 'docker build -t gcr.io/nxg-digital/studentmanagement:v1 .'
                     echo "Image build"
                     
