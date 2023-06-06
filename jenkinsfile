@@ -19,7 +19,7 @@ pipeline{
                 echo "Pulling brnach code....${env.BRANCH_NAME}"
                // git 'https://github.com/shahnaz-git/Studentmanagment.git'
 
-                git branch: "${env.BRANCH_NAME}" , credentialsId: 'github-id', url: 'https://github.com/shahnaz-git/Studentmanagment.git'
+                git branch: "${env.BRANCH_NAME}" , credentialsId: 'github-id', url: 'https://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@github.com/shahnaz-git/Studentmanagment.git'
             }
         }
         stage('Deploy to k8s'){
