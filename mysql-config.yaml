@@ -4,6 +4,6 @@ metadata:
   name: mysql-config
 data:
               #mysql-host: mysql-student-deployment-6db48bfc94-9p6pj
-  mysql-host: 35.200.242.92
+  mysql-host: 10.12.176.3
   dbName: student
   mysql-url: mysql-service
