@@ -25,7 +25,7 @@ pipeline{
         stage('Deploy to k8s'){
             steps{
                  
-                sh "gcloud container clusters get-credentials autopilot-cluster-3 --region asia-south1 --project nxg-digital"
+                sh "gcloud container clusters get-credentials autopilot-cluster-4 --region asia-south1 --project nxg-digital"
                 sh "kubectl get pods"
             
                  
